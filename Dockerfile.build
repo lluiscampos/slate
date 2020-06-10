@@ -1,0 +1,12 @@
+FROM ruby:2.6-slim
+
+COPY . /work
+WORKDIR /work
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        nodejs \
+    && gem install bundler \
+    && bundle install \
+    && bundle exec middleman build --clean
